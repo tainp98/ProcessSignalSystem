@@ -52,11 +52,11 @@ private:
     const char HEADER2 = 0xAA;
     const int HEADER_LEN = 2;
     const int LENGTH_LEN = 1;
-    const int SEQ_NUM_LEN = 2;
+    const int SEQ_NUM_LEN = 4;
     const int ACK_NUM_LEN = 2;
     const int SENSORTYPE_LEN = 1;
     const int CHECKSUM_LEN = 1;
-    const int TOTAL_SIZE_NO_PAYLOAD = 9;
+    const int TOTAL_SIZE_NO_PAYLOAD = 11;
 };
 
 #endif // PACKAGEENCAPSULATION_H

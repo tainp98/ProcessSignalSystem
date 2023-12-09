@@ -23,21 +23,29 @@ void SignalProcessPurposeVector::insertData(const std::vector<char> &insertedDat
     mSize += insertedData.size();
 }
 
-SignalProcessPurposeVector::ProcessIndexs SignalProcessPurposeVector::getProcessIndexs()
+std::vector<char> SignalProcessPurposeVector::getProcessData()
 {
+    int len=0;
+    std::vector<char> res;
     std::unique_lock<std::mutex> lk(mMutex);
-    ProcessIndexs processIndexs;
-    if(mSize > 0){
-        processIndexs.startIndex = mLatestProcessIndex;
-        if(mSize > mBatchSize){
-            processIndexs.length = mBatchSize;
-            mSize -= mBatchSize;
+    int size = mSize;
+    lk.unlock();
+
+    if(size > 0){
+        if(size > mBatchSize){
+            len = mBatchSize;
         }
         else{
-            processIndexs.length = mSize;
-            mSize = 0;
+            len = size;
         }
-        mLatestProcessIndex = (mLatestProcessIndex + processIndexs.length) % mCapacity;
+        res.reserve(len);
+        for(int i = 0; i < len; i++){
+            res.push_back(mData[(mLatestProcessIndex+i)%mCapacity]);
+        }
+        mLatestProcessIndex = (mLatestProcessIndex + len) % mCapacity;
+        lk.lock();
+        mSize -= len;
+        lk.unlock();
     }
-    return processIndexs;
+    return res;
 }

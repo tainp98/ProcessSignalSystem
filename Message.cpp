@@ -6,12 +6,12 @@ Message::Message(SensorType sensorType)
 
 }
 
-uint16_t Message::seqNumber() const
+uint32_t Message::seqNumber() const
 {
     return mSeqNumber;
 }
 
-void Message::setSeqNumber(uint16_t seq)
+void Message::setSeqNumber(uint32_t seq)
 {
     mSeqNumber = seq;
 }
