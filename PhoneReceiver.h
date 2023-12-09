@@ -29,7 +29,7 @@ private:
     void handleMsgQueue1();
     void handleMsgQueue2();
     void processSignal();
-    void executeAlgorithm(char *dataSignal1, int lenData1, char* dataSignal2, int lenData2);
+    void executeAlgorithm(const std::vector<char>& dataSignal1, const std::vector<char>& dataSignal2);
 private:
     const int SampleRate1 = 1000; // 10000 samples per second
     const int SampleRate2 = 1200; // 12000 samples per second

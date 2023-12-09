@@ -6,14 +6,10 @@
 class SignalProcessPurposeVector
 {
 public:
-    struct ProcessIndexs{
-        int startIndex{-1};
-        int length{-1};
-    };
     SignalProcessPurposeVector(int capacity, int batchSize);
     std::vector<char>& data();
     void insertData(const std::vector<char>& insertedData);
-    ProcessIndexs getProcessIndexs();
+    std::vector<char> getProcessData();
 private:
     int mCapacity;
     int mSize{0};

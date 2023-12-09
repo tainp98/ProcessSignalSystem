@@ -106,17 +106,15 @@ void PhoneReceiver::processSignal()
 {
     while (true) {
         auto start = std::chrono::high_resolution_clock::now();
-        auto processIndexs1 = mSignalProcessVector1->getProcessIndexs();
-        auto processIndexs2 = mSignalProcessVector2->getProcessIndexs();
-        executeAlgorithm(mSignalProcessVector1->data().data() + processIndexs1.startIndex, processIndexs1.length,
-                         mSignalProcessVector2->data().data() + processIndexs2.startIndex, processIndexs2.length);
+        executeAlgorithm(mSignalProcessVector1->getProcessData(),
+                         mSignalProcessVector2->getProcessData());
         auto stop = std::chrono::high_resolution_clock::now();
         auto exTime = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
         std::this_thread::sleep_for(std::chrono::milliseconds(10000) - exTime);
     }
 }
 
-void PhoneReceiver::executeAlgorithm(char *dataSignal1, int lenData1, char* dataSignal2, int lenData2)
+void PhoneReceiver::executeAlgorithm(const std::vector<char>& dataSignal1, const std::vector<char>& dataSignal2)
 {
     // todo
 }
